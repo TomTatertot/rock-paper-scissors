@@ -1,0 +1,125 @@
+<!-- //✊🖐️✂️ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header class = "header">
+        <h1 class = "title">Rock Paper Scissors</h1>
+    </header>
+    
+    <div class = "main">
+        <div class="score-info">Choose your weapon</div>
+        <div class = "game-status">First to score 5 points wins the game</div>
+        <div class = "player">
+            <div class = "icon"> ? </div>
+            <div class = "text"> Player: 0 </div>
+        </div>
+        <div class = "computer">
+            <div class = "icon"> ? </div>
+            <div class = "text"> Computer: 0 </div>
+        </div>
+        
+        <div class = "buttons">
+            <button class = "btn">✊</button>
+            <button class = "btn">🖐️</button>
+            <button class = "btn">✂️</button>
+        </div>
+    </div>
+    
+    
+    <script>
+
+        function getComputerChoice(){
+            let randomNum = Math.floor(Math.random() * 3);
+            
+            if (randomNum == 0){
+                return "Rock";
+            }
+            else if (randomNum == 1){
+                return "Paper";
+            }
+            else{
+                return "Scissors";  
+            }
+        }
+
+        // function getHumanChoice(){
+        //     let humanChoice = prompt("Please choose between \"Rock\", \"Paper\", or \"Scissors\"");
+        //     return humanChoice;
+        // }
+
+        function playGame(){
+            const NUM_ROUNDS = 5;
+            let humanScore = 0;
+            let computerScore = 0;
+
+            function playRound(humanChoice, computerChoice){
+                let upperHumanChoice = humanChoice.toUpperCase();
+
+                if (upperHumanChoice == computerChoice.toUpperCase()){
+                    console.log("It is a tie! You both chose " + computerChoice);
+                }
+                else if (upperHumanChoice == "ROCK"){
+                    if (computerChoice == "Scissors"){
+                        console.log("You win! Rock beats Scissors");
+                        alert("You win! Rock beats Scissors")
+                        humanScore++;
+                    }
+                    else {
+                        console.log("You lose! Paper beats Rock");
+                        alert("You lose! Paper beats Rock");
+                        computerScore++;
+                    }
+                }
+                else if (upperHumanChoice == "PAPER"){
+                    if (computerChoice == "Rock"){
+                        console.log("You win! Paper beats Rock");
+                        alert("You win! Paper beats Rock");
+                        humanScore++;
+                    }
+                    else {
+                        console.log("You lose! Scissors beats Paper");
+                        alert("You lose! Scissors beats Paper");
+                        computerScore++;
+                    }
+                }
+                else {
+                    if (computerChoice == "Paper"){
+                        console.log("You win! Scissors beats Paper");
+                        humanScore++;
+                    }
+                    else {
+                        console.log("You lose! Rock beats Scissors");
+                        computerScore++;
+                    }
+                }
+            }
+
+
+            for (let i = 0; i < NUM_ROUNDS; i++){
+                    let humanSelection = getHumanChoice();
+                    let computerSelection = getComputerChoice();
+
+                    playRound(humanSelection, computerSelection);
+                }
+
+                if (humanScore > computerScore){
+                    console.log(`You won! Your Score: ${humanScore} Computer score: ${computerScore}`);
+                }
+                else {
+                    console.log(`You lost! Your Score: ${humanScore} Computer score: ${computerScore}`);
+                }
+            
+        }
+
+        playGame();
+
+    </script>
+
+</body>
+</html>
