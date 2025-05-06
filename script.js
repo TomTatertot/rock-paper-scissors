@@ -28,7 +28,7 @@ buttons.forEach((buttons) => {
         // alert(`${playerSelection}, ${computerSelection}`);
         playRound (playerSelection, computerSelection);
         updateIcons(playerSelection, computerSelection);
-        // updateScore();
+        updateScore();
     })
 })
 
@@ -95,4 +95,12 @@ function updateIcons(playerChoice, computerChoice){
             computerIcon.textContent = "✂️";
             break;
     }
+}
+
+function updateScore() {
+    const player = document.querySelector(".player .text");
+    const computer = document.querySelector(".computer .text");
+
+    player.textContent = `Player: ${playerScore}`;
+    computer.textContent = `Computer: ${computerScore}`;
 }
