@@ -1,3 +1,4 @@
+
 let playerScore = 0;
 let computerScore = 0;
 
@@ -9,25 +10,8 @@ const computerIcon = document.querySelector(".computer .icon");
 const playerScoreText = document.querySelector(".player .text");
 const computerScoreText = document.querySelector(".computer .text");
 
-
 buttons.forEach((button) => { 
     button.addEventListener("click", handleClick);
-    // button.addEventListener("click", () => {
-    //     const playerSelection = button.id;
-    //     const computerSelection = getComputerChoice();
-    //     playRound (playerSelection, computerSelection);
-    //     updateIcons(playerSelection, computerSelection);
-    //     updateScore();
-
-    //     if (gameOver()){
-
-    //     }
-    //     // resetGame();
-
-    //     // if (playerScore >= 5 || computerScore >=5){
-    //     //     resetGame();
-    //     // }
-    // })
 })
 
 function handleClick(event){
@@ -37,13 +21,26 @@ function handleClick(event){
     updateIcons(playerSelection, computerSelection);
     updateScore();
 
-    // if (gameOver()){
-
-    // }
+    if (gameOver()){
+        setTimeout(() => {
+            displayEndMessage(); 
+            resetGame();
+          }, 100);
+    }
 }
 
 function gameOver(){
+    return (playerScore >= 5 || computerScore >= 5); 
+}
 
+function displayEndMessage(){
+    if (playerScore > computerScore){
+        alert("you won!");
+    }
+    else
+    {
+        alert("you lost!");
+    }
 }
 
 function getComputerChoice(){
@@ -129,5 +126,5 @@ function resetGame(){
     computerIcon.textContent = "?";
     playerScore = 0;
     computerScore = 0; 
-
+    updateScore();
 }
