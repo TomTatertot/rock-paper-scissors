@@ -1,36 +1,46 @@
-function getComputerChoice(){
-    let randomNum = Math.floor(Math.random() * 3);
-    
-    if (randomNum == 0){
-        return "Rock";
-    }
-    else if (randomNum == 1){
-        return "Paper";
-    }
-    else{
-        return "Scissors";  
-    }
-}
-
-// function getHumanChoice(){
-//     let humanChoice = prompt("Please choose between \"Rock\", \"Paper\", or \"Scissors\"");
-//     return humanChoice;
-// }
-
 let playerScore = 0;
 let computerScore = 0;
-const buttons = document.querySelectorAll("button");
 
-buttons.forEach((buttons) => {
-    buttons.addEventListener("click", () => {
-        const playerSelection = buttons.id;
+const buttons = document.querySelectorAll("button");
+const scoreInfo = document.querySelector(".score-info");
+const gameStatus = document.querySelector(".game-status");
+const playerIcon = document.querySelector(".player .icon");
+const computerIcon = document.querySelector(".computer .icon");
+const playerScoreText = document.querySelector(".player .text");
+const computerScoreText = document.querySelector(".computer .text");
+
+
+buttons.forEach((button) => { 
+    button.addEventListener("click", () => {
+        const playerSelection = button.id;
         const computerSelection = getComputerChoice();
         // alert(`${playerSelection}, ${computerSelection}`);
         playRound (playerSelection, computerSelection);
         updateIcons(playerSelection, computerSelection);
         updateScore();
+        // resetGame();
+
+        // if (playerScore >= 5 || computerScore >=5){
+        //     resetGame();
+        // }
     })
 })
+
+function handleClick(){
+    
+}
+
+function getComputerChoice(){
+    let randomNum = Math.floor(Math.random() * 3);
+    switch(randomNum){
+        case 0:
+            return "Rock";
+        case 1:
+            return "Paper";
+        case 2:
+            return "Scissors";
+    }
+}
 
 function playRound(humanChoice, computerChoice){
     humanChoice = humanChoice.toLowerCase();
@@ -41,9 +51,6 @@ function playRound(humanChoice, computerChoice){
         paper: {weakTo: 'scissors', strongTo: 'rock'},
         scissors: {weakTo: 'rock', strongTo: 'paper'}
     }
-
-    let scoreInfo = document.querySelector(".score-info");
-    let gameStatus = document.querySelector(".game-status");
 
     if (weapons[humanChoice].strongTo === computerChoice) {
         scoreInfo.textContent = "You won!";
@@ -68,8 +75,6 @@ function capitalizeFirstLetter(string) {
   }
 
 function updateIcons(playerChoice, computerChoice){
-    let playerIcon = document.querySelector(".player .icon");
-    let computerIcon = document.querySelector(".computer .icon");
     // ✊🖐️✂️
     switch(playerChoice){
         case "rock":
@@ -83,7 +88,6 @@ function updateIcons(playerChoice, computerChoice){
             break;
     }
 
-    // alert("wtf");
     switch(computerChoice){
         case "Rock":
             computerIcon.textContent = "✊";
@@ -98,9 +102,16 @@ function updateIcons(playerChoice, computerChoice){
 }
 
 function updateScore() {
-    const player = document.querySelector(".player .text");
-    const computer = document.querySelector(".computer .text");
+    playerScoreText.textContent = `Player: ${playerScore}`;
+    computerScoreText.textContent = `Computer: ${computerScore}`;
+}
 
-    player.textContent = `Player: ${playerScore}`;
-    computer.textContent = `Computer: ${computerScore}`;
+function resetGame(){
+    scoreInfo.textContent = "Choose your weapon";
+    gameStatus.textContent = "First to score 5 points wins the game";
+    playerIcon.textContent = "?";
+    computerIcon.textContent = "?";
+    playerScore = 0;
+    computerScore = 0; 
+
 }
