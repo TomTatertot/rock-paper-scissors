@@ -11,23 +11,39 @@ const computerScoreText = document.querySelector(".computer .text");
 
 
 buttons.forEach((button) => { 
-    button.addEventListener("click", () => {
-        const playerSelection = button.id;
-        const computerSelection = getComputerChoice();
-        // alert(`${playerSelection}, ${computerSelection}`);
-        playRound (playerSelection, computerSelection);
-        updateIcons(playerSelection, computerSelection);
-        updateScore();
-        // resetGame();
+    button.addEventListener("click", handleClick);
+    // button.addEventListener("click", () => {
+    //     const playerSelection = button.id;
+    //     const computerSelection = getComputerChoice();
+    //     playRound (playerSelection, computerSelection);
+    //     updateIcons(playerSelection, computerSelection);
+    //     updateScore();
 
-        // if (playerScore >= 5 || computerScore >=5){
-        //     resetGame();
-        // }
-    })
+    //     if (gameOver()){
+
+    //     }
+    //     // resetGame();
+
+    //     // if (playerScore >= 5 || computerScore >=5){
+    //     //     resetGame();
+    //     // }
+    // })
 })
 
-function handleClick(){
-    
+function handleClick(event){
+    const playerSelection = event.target.id;
+    const computerSelection = getComputerChoice();
+    playRound (playerSelection, computerSelection);
+    updateIcons(playerSelection, computerSelection);
+    updateScore();
+
+    // if (gameOver()){
+
+    // }
+}
+
+function gameOver(){
+
 }
 
 function getComputerChoice(){
